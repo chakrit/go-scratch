@@ -4,9 +4,10 @@ PACKAGE := .
 
 .PHONY: default all vet test deps
 
-default: all vet
+default: vet build
 
-all: deps
+all: build
+build: deps
 	./go build $(PACKAGE)
 vet:
 	./go vet $(PACKAGE)
