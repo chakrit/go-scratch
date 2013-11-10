@@ -46,6 +46,9 @@ required go-lang import paths you need in your project.
 Running `make deps` will result in calling `go get` for each of the dependencies listed in
 the `deps.list` file.
 
+I have a few [gorilla toolkit](http://www.gorillatoolkit.org/) dependencies in as those
+are what I often needs, feel free to fork this project and modify to your liking.
+
 # Sample
 
 Here's a sample output of what happens when you simply cloned this gist and issue `make`:
