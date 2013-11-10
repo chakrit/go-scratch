@@ -43,7 +43,8 @@ $ make
 ```
 
 Basically it automatically `go get` any missing dependencies for you and then invokes the
-build command with the local folder.
+build command with the local folder. All dependencies are stored in the local folder `.go`
+which is basically your local go workspace (as opposed to a global one.)
 
 # TODO:
 
