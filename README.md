@@ -10,6 +10,10 @@ It is built with these 2 goals in mind:
 * N-step build without any special setup after any `git clone` on a newly minted machine
   except for installing the `go` compiler itself.
 
+* Do not rely on global `GOPATH` and yet still allows you to check your entire source
+  folder in as if you would a normal go program. This makes your repository still plays
+  well with other go coders and global `GOPATH` convention.
+
 # Makefile
 
 Everything is done through the `Makefile` for convenience. A wrapper script `./go` is also
@@ -37,4 +41,7 @@ $ make
 ./go get github.com/gorilla/mux github.com/gorilla/context
 ./go build .
 ```
+
+Basically it automatically `go get` any missing dependencies for you and then invokes the
+build command with the local folder.
 
