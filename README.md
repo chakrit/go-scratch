@@ -1,8 +1,8 @@
 
 # GOLANG project template
 
-This is my personal go-lang project template.
-It is built with these 2 goals in mind:
+This is my personal [GOLANG](http://golang.org/) project template.
+It is built with these goals in mind:
 
 * Everything should be local to the development folder as much as is possible without
   resorting to ugly hacks.
