@@ -1,6 +1,6 @@
 #!/usr/bin/make
 
-PACKAGE := .
+PKG := .
 
 .PHONY: default all vet test deps
 
@@ -8,15 +8,15 @@ default: vet build
 
 all: build
 build: deps
-	./go build $(PACKAGE)
+	./go build $(PKG)
 vet:
-	./go vet $(PACKAGE)
+	./go vet $(PKG)
 fmt:
-	./go fmt $(PACKAGE)
+	./go fmt $(PKG)
 test: all
-	./go test $(PACKAGE)
+	./go test $(PKG)
 clean:
-	./go clean $(PACKAGE)
+	./go clean $(PKG)
 
 # read in a list of dependencies
 deps:
