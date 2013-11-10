@@ -20,6 +20,7 @@ Just run these commands or make a script and modify to your liking:
 
 ```sh
 mkdir your-new-shiny-project    # Make a new shiny folder for your new project.
+cd your-new-shiny-project       # Get into the folder first, of course.
 git init                        # Or not, doesn't matter.
 
 # Download the scratch template
