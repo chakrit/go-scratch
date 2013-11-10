@@ -45,3 +45,11 @@ $ make
 Basically it automatically `go get` any missing dependencies for you and then invokes the
 build command with the local folder.
 
+# TODO:
+
+* Package this into a script.
+
+# LICENSE:
+
+[WTFPL](http://www.wtfpl.net/)
+
