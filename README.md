@@ -14,6 +14,20 @@ It is built with these 2 goals in mind:
   folder in as if you would a normal go program. This makes your repository still plays
   well with other go coders and global `GOPATH` convention.
 
+# Getting Started
+
+Just run these commands or make a script and modify to your liking:
+
+```sh
+mkdir your-new-shiny-project    # Make a new shiny folder for your new project.
+git init                        # Or not, doesn't matter.
+
+# Download the scratch template
+curl -L https://github.com/chakrit/go-scratch/archive/master.tar.gz | tar -xzv --strip 1
+
+git commit -A -m "Initialize GOLANG project. (github.com/chakrit/go-scratch)"
+```
+
 # Makefile
 
 Everything is done through the `Makefile` for convenience. A wrapper script `./go` is also
