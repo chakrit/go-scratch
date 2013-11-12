@@ -9,16 +9,14 @@ default: vet build
 all: build
 build: deps
 	./go build $(PKG)
-vet:
+vet: deps
 	./go vet $(PKG)
 fmt:
 	./go fmt $(PKG)
-test: all
+test: build
 	./go test $(PKG)
 clean:
 	./go clean $(PKG)
-
-# read in a list of dependencies
 deps:
-	./go get $(shell cat deps.list)
+	./go get -d $(PKG)
 
