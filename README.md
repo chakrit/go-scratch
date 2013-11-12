@@ -56,8 +56,7 @@ Here's a sample output of what happens when you simply cloned this gist and issu
 ```
 $ make
 ./go get -d .
-./go vet .
-./go build .
+./go test .
 ```
 
 Basically it automatically `go get` any missing dependencies for you and then runs all the
