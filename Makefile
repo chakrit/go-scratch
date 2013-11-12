@@ -2,13 +2,14 @@
 
 PKG := .
 
-.PHONY: default all vet test deps
+.PHONY: default all vet test deps lint
 
 default: test
 
 all: build
 build: deps
 	./go build $(PKG)
+lint: vet
 vet: deps
 	./go vet $(PKG)
 fmt:
