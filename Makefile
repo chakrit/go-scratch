@@ -4,7 +4,7 @@ PKG := .
 
 .PHONY: default all vet test deps
 
-default: vet build
+default: test
 
 all: build
 build: deps
