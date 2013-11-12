@@ -13,7 +13,7 @@ vet: deps
 	./go vet $(PKG)
 fmt:
 	./go fmt $(PKG)
-test: build
+test: deps
 	./go test $(PKG)
 clean:
 	./go clean $(PKG)
