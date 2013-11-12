@@ -35,20 +35,19 @@ git commit -m "Initialize GOLANG project. (github.com/chakrit/go-scratch)"
 Everything is done through the `Makefile` for convenience. A wrapper script `./go` is also
 provided that invokes `go` with `GOPATH` sets to the local `.go` folder.
 
-Makefile tasks defaults to `all` and `vet`. The `all` is simply an alias for the `build`
-task. All common tasks you'd do with `go` is written the same way with regards to the
-Makefile so `go vet` is, through the Makefile, `make vet`.
+Makefile tasks defaults to `test`. The `all` task is simply an alias for the `build`
+task. All common tasks you'd do with `go` is given the same name in the Makefile so
+`go vet` is, through the Makefile, `make vet` or via the wrapper script `./go vet`.
 
 # Dependencies
 
-Special Makefile task `deps` and the list file `deps.list` is provided to list all the
-required go-lang import paths you need in your project.
-
-Running `make deps` will result in calling `go get` for each of the dependencies listed in
-the `deps.list` file.
+Dependencies are automatic thanks to `go get .` automatically scanning your source files
+for dependencies. Run `make deps` to explicitly downloads them. Otherwise tasks that
+normally requires dependencies to be installed will do them automatically.
 
 I have a few [gorilla toolkit](http://www.gorillatoolkit.org/) dependencies in as those
-are what I often needs, feel free to fork this project and modify to your liking.
+are what I often needs, feel free to fork this project and modify `main.go` to your
+liking. Everyone's `main.go` will all be different anyway.
 
 # Sample
 
@@ -56,14 +55,13 @@ Here's a sample output of what happens when you simply cloned this gist and issu
 
 ```
 $ make
+./go get -d .
 ./go vet .
-./go get github.com/gorilla/mux github.com/gorilla/context
 ./go build .
 ```
 
-Basically it automatically `go get` any missing dependencies for you and then invokes the
-build command with the local folder. All dependencies are stored in the local folder `.go`
-which is basically your local go workspace (as opposed to a global one.)
+Basically it automatically `go get` any missing dependencies for you and then runs all the
+tests in the project.
 
 # TODO:
 
