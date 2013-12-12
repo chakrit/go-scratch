@@ -1,6 +1,7 @@
 #!/usr/bin/make
 
 PKG := .
+BIN := $(shell basename `pwd`)
 
 .PHONY: default all vet test deps lint
 
@@ -20,4 +21,6 @@ clean:
 	./go clean $(PKG)
 deps:
 	./go get -d $(PKG)
+run: all
+	./$(BIN)
 
