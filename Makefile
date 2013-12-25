@@ -11,7 +11,7 @@ default: test
 
 all: build
 build: deps
-	./go build $(PKG)
+	./go build -v $(PKG)
 lint: vet
 vet: deps
 	./go vet $(PKG)
