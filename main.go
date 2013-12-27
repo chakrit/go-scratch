@@ -1,12 +1,10 @@
 package main
 
 import "fmt"
-import "github.com/gorilla/mux"
+import "github.com/kylelemons/go-gypsy/yaml"
+
+var yamlDoc = yaml.Map{"Hello": yaml.Scalar("World")}
 
 func main() {
-	fmt.Printf("Hello")
-
-	// testing that imports actually works
-	x := mux.NewRouter()
-	_ = x
+	fmt.Printf("%s\n", yaml.Render(yamlDoc))
 }
