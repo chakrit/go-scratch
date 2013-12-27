@@ -16,7 +16,13 @@ It is built with these goals in mind:
 
 # Getting Started
 
-Just run these commands or make a script and modify to your liking:
+Run this one-liner to dump the repository content into current directory.
+
+```sh
+curl -L https://github.com/chakrit/go-scratch/archive/master.tar.gz | tar -xzv --strip 1
+```
+
+Or a full setup for a new project:
 
 ```sh
 mkdir your-new-shiny-project    # Make a new shiny folder for your new project.
@@ -41,30 +47,33 @@ task. All common tasks you'd do with `go` is given the same name in the Makefile
 
 # Dependencies
 
-Dependencies are automatic thanks to `go get .` automatically scanning your source files
-for dependencies. Run `make deps` to explicitly downloads them. Otherwise tasks that
-normally requires dependencies to be installed will do them automatically.
+Dependencies are handled implicitly and automatically as you run tasks that involve import
+paths thanks to the powerful scanning capability of the `go list` commands.
 
-I have a few [gorilla toolkit](http://www.gorillatoolkit.org/) dependencies in as those
-are what I often needs, feel free to fork this project and modify `main.go` to your
-liking. Everyone's `main.go` will all be different anyway.
+Specifically, `make deps` and `make test-deps` will invoke the scanning and then
+`go install` will be used to install each and every import depdencies found. This is
+however, not required as tasks that requires dependencies will automatically runs them
+first.
+
+The initial `main.go` file provided with this project contains some dependencies as well
+as tests (and test dependencies) to demonstrate this.
 
 # Sample
 
-Here's a sample output of what happens when you simply cloned this gist and issue `make`:
+Here's a sample output of what happens when you simply cloned this repository and issue
+`make`:
 
 ```
 $ make
-./go get -d .
+./go get -d -t .
+./go install github.com/kylelemons/go-gypsy/yaml # ... and other dependencies
 ./go test .
+ok      _/Users/chakrit/Documents/go-scratch    0.011s
 ```
-
-Basically it automatically `go get` any missing dependencies for you and then runs all the
-tests in the project.
 
 # TODO:
 
-* Package this into a script.
+* Package the curl installation into a script.
 
 # LICENSE:
 
