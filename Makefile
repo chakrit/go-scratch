@@ -20,6 +20,8 @@ fmt:
 	./go fmt $(PKG)
 test: test-deps
 	./go test $(PKG)
+cover: test-deps
+	./go test -cover $(PKG)
 clean:
 	./go clean $(PKG)
 deps:
