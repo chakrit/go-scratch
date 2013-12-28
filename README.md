@@ -7,12 +7,12 @@ It is built with these goals in mind:
 * Everything should be local to the development folder as much as is possible without
   resorting to ugly hacks.
 
-* N-step build without any special setup after any `git clone` on a newly minted machine
-  except for installing the `go` compiler itself.
+* 1-step build or test without any special setup after any `git clone` on a newly minted
+  machine except for installing the `go` compiler itself.
 
 * Do not rely on global `GOPATH` and yet still allows you to check your entire source
-  folder in as if you would a normal go program. This makes your repository still plays
-  well with other go coders and global `GOPATH` convention.
+  folder in as if you would a normal go program inside one. This makes your repository
+  plays well with other go coders who will surely be using the global `GOPATH` convention.
 
 # Getting Started
 
@@ -48,46 +48,46 @@ task. All common tasks you'd do with `go` is given the same name in the Makefile
 # Dependencies
 
 Dependencies are handled implicitly and automatically as you run tasks that involve import
-paths thanks to the powerful scanning capability of the `go list` commands.
+paths thanks to the powerful `go get` command.
 
-Specifically, `make deps` and `make test-deps` will invoke the scanning and then
-`go install` will be used to install each and every import depdencies found. This is
-however, not required as tasks that requires dependencies will automatically runs them
-first.
+Specifically, `make deps` and `make test-deps` will download the dependencies into place
+and subsequent `make test` or `make build` will automaticaly compiles the downloaded
+dependencies as needed.
 
 The initial `main.go` file provided with this project contains some dependencies as well
 as tests (and test dependencies) to demonstrate this.
 
-### Subpackages
+# Subpackages
 
-This template is meant to be used for a single-package project. However you can still use
-this with multiple subpackages quite easily via one of the following way:
+This template supports multiple packages development inside a single folder out of the
+box. You are, however, required to list all the subpackage paths inside the Makefile `PKG`
+variable as automatically detecting them is tricky and error prone.
 
-* Override `PKG` variable before running make targets to target a specific subpackage
-  (`PKG` is the import path passed to the `go` tool, defaults to `.`)
-* Create a dummy `go` source file in the root package that implicitly references all
-  subpackages.
+For example, if you have a `context` subpackage, edit the `PKG` line like so:
 
-For example, if you have a `context` subpackage, you can run its tests like so:
-
-```sh
-$ make test PKG=./context
+```make
+PKG := . ./context
 ```
 
-# Sample
+... or if you have nothing in the root folder and only subpackages `uno` `dos` and `tres`:
+
+```make
+PKG := ./uno ./dos ./tres
+```
+
+# Example
 
 Here's a sample output of what happens when you simply cloned this repository and issue
 `make`:
 
 ```sh
 $ make
-./go get -d -t .
-./go install github.com/kylelemons/go-gypsy/yaml # ... and other dependencies
-./go test .
-ok      _/Users/chakrit/Documents/go-scratch    0.011s
+/Users/chakrit/Documents/go-scratch/go get -d -t .
+/Users/chakrit/Documents/go-scratch/go test .
+ok    _/Users/chakrit/Documents/go-scratch0.010s
 ```
 
-### Silent run
+# Silent run
 
 Uses `make`'s `-s` flag to prevent `make` from echoing commands (useful for reducing
 clutter to standard output.)

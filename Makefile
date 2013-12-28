@@ -2,10 +2,7 @@
 
 PKG := .
 BIN := $(shell basename `pwd`)
-GO  := ./go
-
-DEPS      := $(shell $(GO) list -f '{{join .Deps "\n"}}' $(PKG) | grep -v "^_")
-TEST_DEPS := $(DEPS) $(shell $(GO) list -f '{{join .TestImports "\n"}}' $(PKG) | grep -v "^_")
+GO  := $(realpath ./go)
 
 .PHONY: default all vet test deps lint
 
@@ -13,9 +10,10 @@ default: test
 
 all: build
 build: deps
-	$(GO) build -v $(PKG)
+	$(GO) build $(PKG)
 lint: vet
 vet: deps
+	$(GO) get code.google.com/p/go.tools/cmd/vet
 	$(GO) vet $(PKG)
 fmt:
 	$(GO) fmt $(PKG)
@@ -24,13 +22,13 @@ test: test-deps
 cover: test-deps
 	$(GO) test -cover $(PKG)
 clean:
-	$(GO) clean $(PKG)
+	$(GO) clean -i $(PKG)
+clean-all:
+	$(GO) clean -i -r $(PKG)
 deps:
 	$(GO) get -d $(PKG)
-	$(GO) install $(DEPS)
 test-deps:
 	$(GO) get -d -t $(PKG)
-	$(GO) install $(TEST_DEPS)
 run: all
 	./$(BIN)
 
