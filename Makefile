@@ -4,7 +4,7 @@ PKG := .
 BIN := $(shell basename `pwd`)
 GO  := $(realpath ./go)
 
-.PHONY: default all vet test deps lint
+.PHONY: %
 
 default: test
 
