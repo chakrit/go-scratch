@@ -58,16 +58,42 @@ first.
 The initial `main.go` file provided with this project contains some dependencies as well
 as tests (and test dependencies) to demonstrate this.
 
+### Subpackages
+
+This template is meant to be used for a single-package project. However you can still use
+this with multiple subpackages quite easily via one of the following way:
+
+* Override `PKG` variable before running make targets to target a specific subpackage
+  (`PKG` is the import path passed to the `go` tool, defaults to `.`)
+* Create a dummy `go` source file in the root package that implicitly references all
+  subpackages.
+
+For example, if you have a `context` subpackage, you can run its tests like so:
+
+```sh
+$ make test PKG=./context
+```
+
 # Sample
 
 Here's a sample output of what happens when you simply cloned this repository and issue
 `make`:
 
-```
+```sh
 $ make
 ./go get -d -t .
 ./go install github.com/kylelemons/go-gypsy/yaml # ... and other dependencies
 ./go test .
+ok      _/Users/chakrit/Documents/go-scratch    0.011s
+```
+
+### Silent run
+
+Uses `make`'s `-s` flag to prevent `make` from echoing commands (useful for reducing
+clutter to standard output.)
+
+```sh
+$ make -s
 ok      _/Users/chakrit/Documents/go-scratch    0.011s
 ```
 
