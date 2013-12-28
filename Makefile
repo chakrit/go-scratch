@@ -4,7 +4,7 @@ PKG := .
 BIN := $(shell basename `pwd`)
 GO  := $(realpath ./go)
 
-DEPS := $(shell $(GO) list -f '{{join .Deps "\n"}}' $(PKG) \
+DEPS = $(shell $(GO) list -f '{{join .Deps "\n"}}' $(PKG) \
 	| sort | uniq | grep -v "^_")
 
 .PHONY: %
