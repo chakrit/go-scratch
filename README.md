@@ -97,11 +97,11 @@ $ make -s
 ok      _/Users/chakrit/Documents/go-scratch    0.011s
 ```
 
+# LICENSE
+
+[WTFPL](http://www.wtfpl.net/)
+
 # TODO:
 
 * Package the curl installation into a script.
-
-# LICENSE:
-
-[WTFPL](http://www.wtfpl.net/)
 
