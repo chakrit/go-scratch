@@ -4,6 +4,9 @@ PKG := .
 BIN := $(shell basename `pwd`)
 GO  := $(realpath ./go)
 
+DEPS := $(shell $(GO) list -f '{{join .Deps "\n"}}' $(PKG) \
+	| sort | uniq | grep -v "^_")
+
 .PHONY: %
 
 default: test
@@ -27,8 +30,10 @@ clean-all:
 	$(GO) clean -i -r $(PKG)
 deps:
 	$(GO) get -d $(PKG)
-test-deps:
+	$(GO) install $(DEPS)
+test-deps: deps
 	$(GO) get -d -t $(PKG)
+	$(GO) test -i $(PKG)
 run: all
 	./$(BIN)
 
