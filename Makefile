@@ -3,8 +3,8 @@
 PKG := .
 BIN := $(shell basename `pwd`)
 
-DEPS      := $(shell ./go list -f '{{join .Deps "\n"}}' . | grep -v "^_")
-TEST_DEPS := $(DEPS) $(shell ./go list -f '{{join .TestImports "\n"}}' . | grep -v "^_")
+DEPS      := $(shell ./go list -f '{{join .Deps "\n"}}' $(PKG) | grep -v "^_")
+TEST_DEPS := $(DEPS) $(shell ./go list -f '{{join .TestImports "\n"}}' $(PKG) | grep -v "^_")
 
 .PHONY: default all vet test deps lint
 
