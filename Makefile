@@ -2,9 +2,10 @@
 
 PKG := .
 BIN := $(shell basename `pwd`)
+GO  := ./go
 
-DEPS      := $(shell ./go list -f '{{join .Deps "\n"}}' $(PKG) | grep -v "^_")
-TEST_DEPS := $(DEPS) $(shell ./go list -f '{{join .TestImports "\n"}}' $(PKG) | grep -v "^_")
+DEPS      := $(shell $(GO) list -f '{{join .Deps "\n"}}' $(PKG) | grep -v "^_")
+TEST_DEPS := $(DEPS) $(shell $(GO) list -f '{{join .TestImports "\n"}}' $(PKG) | grep -v "^_")
 
 .PHONY: default all vet test deps lint
 
@@ -12,24 +13,24 @@ default: test
 
 all: build
 build: deps
-	./go build -v $(PKG)
+	$(GO) build -v $(PKG)
 lint: vet
 vet: deps
-	./go vet $(PKG)
+	$(GO) vet $(PKG)
 fmt:
-	./go fmt $(PKG)
+	$(GO) fmt $(PKG)
 test: test-deps
-	./go test $(PKG)
+	$(GO) test $(PKG)
 cover: test-deps
-	./go test -cover $(PKG)
+	$(GO) test -cover $(PKG)
 clean:
-	./go clean $(PKG)
+	$(GO) clean $(PKG)
 deps:
-	./go get -d $(PKG)
-	./go install $(DEPS)
+	$(GO) get -d $(PKG)
+	$(GO) install $(DEPS)
 test-deps:
-	./go get -d -t $(PKG)
-	./go install $(TEST_DEPS)
+	$(GO) get -d -t $(PKG)
+	$(GO) install $(TEST_DEPS)
 run: all
 	./$(BIN)
 
