@@ -1,6 +1,6 @@
 #!/usr/bin/make
 
-PKG := .
+PKG := . # $(dir $(wildcard ./*)) # uncomment for implicit submodules
 BIN := $(shell basename `pwd`)
 GO  := $(realpath ./go)
 
