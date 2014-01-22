@@ -1,4 +1,3 @@
-
 # GOLANG project template
 
 This is my personal [GOLANG](http://golang.org/) project template.
@@ -22,7 +21,9 @@ Run this one-liner to dump the repository content into current directory.
 curl -L https://github.com/chakrit/go-scratch/archive/master.tar.gz | tar -xzv --strip 1
 ```
 
-Or a full setup for a new project:
+Do not forget to update the `LICENSE` file to match what you need. Or simply remove it.
+
+Example for a full setup for a new project:
 
 ```sh
 mkdir your-new-shiny-project    # Make a new shiny folder for your new project.
