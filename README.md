@@ -32,6 +32,7 @@ git init                        # Or not, doesn't matter.
 
 # Download the scratch template
 curl -L https://github.com/chakrit/go-scratch/archive/master.tar.gz | tar -xzv --strip 1
+# (optional) vim LICENSE        # Edit LICENSE file.
 
 git add .
 git commit -m "Initialize GOLANG project. (github.com/chakrit/go-scratch)"
